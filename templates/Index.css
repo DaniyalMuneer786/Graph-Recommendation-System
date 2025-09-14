@@ -1,0 +1,136 @@
+#p1{
+    background-color: white;
+    color: rebeccapurple;
+    width: 100%;
+    height: 70px;
+    font-family:'Times New Roman', Times, serif;
+    border-style: solid;
+    border-color: red;
+}
+#p2{
+    /* border-style: solid; border-color: red; */
+    margin-left: 1000px;
+    margin-top: -100px;
+    font-family: 'Times New Roman', Times, serif;
+    /* border-radius: 30px; */
+}
+
+#analysisType{
+    font-size: 20px; width: 30%; height: 50px;
+    text-align: center;
+    margin-left: -10px;
+    color: tomato;
+    font-family: 'Times New Roman', Times, serif;
+}
+/* body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        } */
+.file-upload-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 300px;
+    text-align: center;
+    /* margin-top: -100px; */
+    
+    
+}
+.file-upload-wrapper input[type="file"] {
+    display: none;
+}
+.file-upload-wrapper label {
+    display: block;
+    width: 100%;
+    padding: 20px 0;
+    background-color: #724eab;
+    margin-top: -100px;
+    color: white;
+    font-size: 18px;
+    border-radius: 25px;
+    cursor: pointer;
+    margin-left: 170px;
+    /* transition: background-color 0.3s ease; */
+    border-style: solid;
+    border-color: red;
+}
+.file-upload-wrapper label:hover {
+    background-color: #13e713;
+    border-style: solid;
+    border-color: red;
+}
+.file-info, .column-info {
+    margin-left: 300px;
+    /* margin-top: 20px; */
+    font-size: 20px;
+    color: white;
+}
+.c1{
+    background-color: rgba(160, 60, 100, 0.908);
+    opacity: 0.9;
+    height: 1200px;
+    width: 95%;
+    margin-left: 30px;
+    border-style: solid;
+    border-color: red;
+    border-radius: 20px;
+}
+
+.column-info .checkbox-container {
+    display: flex;
+    align-items: center;
+}
+.column-info .checkbox-container label {
+    margin-top: 15px;
+    margin-left: 0px;
+}
+
+/* #p2{
+    background-color: aliceblue;
+    height: 600px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    width: 45%;
+    margin-top: 100px;
+    margin-left: 50px;
+} */
+
+
+
+
+.file-upload-wrapper-1 {
+    position: relative;
+    display: inline-block;
+    width: 300px;
+    text-align: center;
+    /* margin-top: -100px; */
+    
+    
+}
+.file-upload-wrapper-1 input[type="file"] {
+    display: none;
+}
+.file-upload-wrapper-1 label {
+    display: block;
+    width: 100%;
+    padding: 20px 0;
+    background-color: #19b6a4;
+    /* margin-top: -100px; */
+    color: white;
+    font-size: 18px;
+    border-radius: 25px;
+    cursor: pointer;
+    margin-left: 850px;
+    /* transition: background-color 0.3s ease; */
+    border-style: solid;
+    border-color: red;
+}
+.file-upload-wrapper-1 label:hover {
+    background-color: #e71313;
+    border-style: solid;
+    border-color: red;
+}
