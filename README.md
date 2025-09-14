@@ -93,11 +93,17 @@ Get recommended plots.
 Download plots if needed.
 
 🔹 Folder Structure
+
 📁 Project Folder
+
 │── 📂 uploads      # stores uploaded CSV files
+
 │── 📂 templates    # HTML frontend files
+
 │── 📂 static       # CSS, images, styles
+
 │── app.py          # Flask backend code
+
 │── requirements.txt # Python libraries needed
 
 🔹 Why this Project is Useful?
@@ -109,4 +115,4 @@ Download plots if needed.
 
 🙏 Thanks for Checking Out This Project!
 
-Do you want me to also make a requirements.txt file (with all Python libraries you need) so that anyone can directly install and run this project?
+
