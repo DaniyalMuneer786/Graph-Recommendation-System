@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSV Plotter</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <style>
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>CSV Plotter</h1>
+  <input type="file" id="fileInput" accept=".csv">
+  <div id="columnsSelection" class="hidden">
+    <label for="columns">Select Columns:</label>
+    <select id="columns" multiple></select>
+    <button id="plotButton">Generate Plots</button>
+  </div>
+  <div id="plots"></div>
+  <script>
+    document.getElementById('fileInput').addEventListener('change', handleFileUpload);
+
+    function handleFileUpload(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const data = e.target.result;
+          const parsedData = d3.csvParse(data);
+          populateColumnsSelection(parsedData.columns);
+        };
+        reader.readAsText(file);
+      }
+    }
+
+    function populateColumnsSelection(columns) {
+      const columnsSelect = document.getElementById('columns');
+      columnsSelect.innerHTML = '';
+      columns.forEach(column => {
+        const option = document.createElement('option');
+        option.value = column;
+        option.text = column;
+        columnsSelect.appendChild(option);
+      });
+      document.getElementById('columnsSelection').classList.remove('hidden');
+    }
+
+    document.getElementById('plotButton').addEventListener('click', generatePlots);
+
+    function generatePlots() {
+      const selectedColumns = Array.from(document.getElementById('columns').selectedOptions).map(option => option.value);
+      if (selectedColumns.length < 2) {
+        alert('Please select at least 2 columns.');
+        return;
+      }
+      const file = document.getElementById('fileInput').files[0];
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const data = e.target.result;
+        const parsedData = d3.csvParse(data);
+        createRecommendedPlots(parsedData, selectedColumns);
+      };
+      reader.readAsText(file);
+    }
+
+    function createRecommendedPlots(data, columns) {
+      const plotsContainer = document.getElementById('plots');
+      plotsContainer.innerHTML = '';
+
+      if (columns.length === 2) {
+        const trace = {
+          x: data.map(d => d[columns[0]]),
+          y: data.map(d => d[columns[1]]),
+          mode: 'markers',
+          type: 'scatter'
+        };
+
+        const layout = {
+          title: `Scatter Plot of ${columns[0]} vs ${columns[1]}`,
+          xaxis: { title: columns[0] },
+          yaxis: { title: columns[1] }
+        };
+
+        const plotDiv = document.createElement('div');
+        plotDiv.id = 'plot1';
+        plotsContainer.appendChild(plotDiv);
+
+        Plotly.newPlot(plotDiv, [trace], layout);
+      }
+    }
+  </script>
+</body>
+</html>
