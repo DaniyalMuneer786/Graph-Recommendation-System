@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plot Results</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <style>
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      padding: 0;
+      background-color: cadetblue;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    .plot-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .plot {
+      margin: 20px 0;
+    }
+    .message {
+      color: red;
+      text-align: center;
+    }
+    a {
+      display: block;
+      text-align: center;
+      margin: 20px;
+      font-size: 16px;
+      color: #007bff;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    #p1{
+    background-color: white;
+    color: rebeccapurple;
+    width: 100%;
+    height: 70px;
+    font-family:'Times New Roman', Times, serif;
+    border-style: solid;
+    border-color: red;
+  }
+  </style>
+</head>
+<body>
+  <div id="p1">
+    <h1 style="text-align: center; font-size: 30px;">{{ analysis_type | capitalize }} Analysis</h1> 
+  </div>
+
+  <div class="plot-container" id="plot-container">
+    {% for plot_url in plot_urls %}
+      {% if plot_url and plot_url.startswith("data:image/png;base64,") %}
+        <img src="{{ plot_url }}" alt="Plot" class="plot" style="max-width: 100%; height: auto;">
+      {% else %}
+        <p class="message">{{ plot_url }}</p>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      try {
+        // Convert the `plot_urls` variable from Flask to a JavaScript object
+        var plotUrls = JSON.parse('{{ plot_urls | safe }}');
+        var plotContainer = document.getElementById('plot-container');
+
+        if (!Array.isArray(plotUrls)) {
+          console.error('plotUrls is not an array:', plotUrls);
+          return;
+        }
+
+        plotUrls.forEach(function(plotUrl) {
+          var element;
+
+          if (plotUrl) {
+            // Check if plotUrl starts with the base64 image prefix
+            if (typeof plotUrl === 'string' && plotUrl.startsWith("data:image/png;base64,")) {
+              element = document.createElement('img');
+              element.src = plotUrl;
+              element.alt = "Plot";
+              element.className = 'plot';
+              element.style.maxWidth = '100%';
+              element.style.height = 'auto';
+            } else if (typeof plotUrl === 'string' && plotUrl.startsWith("Error:")) {
+              // Handle error messages or textual content
+              element = document.createElement('p');
+              element.className = 'message';
+              element.textContent = plotUrl;
+            } else if (typeof plotUrl === 'string' && plotUrl.includes("bivariate")) {
+              // Handle specific cases for bivariate analysis plots
+              element = document.createElement('p');
+              element.className = 'message';
+              element.textContent = "Bivariate analysis plot URL or message: " + plotUrl;
+            } else {
+              // Handle unexpected plot URLs or types
+              element = document.createElement('p');
+              element.className = 'message';
+              element.textContent = "Unexpected plot URL: " + plotUrl;
+            }
+
+            plotContainer.appendChild(element);
+          } else {
+            // Handle null or undefined plotUrl
+            element = document.createElement('p');
+            element.className = 'message';
+            element.textContent = "No plot available.";
+            plotContainer.appendChild(element);
+          }
+        });
+      } catch (error) {
+        console.error('Error processing plotUrls:', error);
+      }
+    });
+  </script> 
+  <a href="/" style="color: white; font-size: 20px;">Back</a>
+</body>
+</html>

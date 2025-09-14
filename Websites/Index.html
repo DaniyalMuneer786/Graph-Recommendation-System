@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graph Recommendation Application</title>
+    <link rel="stylesheet" href="Index.css">
+    <style>
+        body {
+            background-color: cornflowerblue;
+        }
+    </style>
+</head>
+<body>
+    <div id="p1">
+        <h1 style="text-align: center; font-size: 30px;">Graph Recommendation Application</h1> 
+    </div>
+    <br><br><br>
+    <div class="c1">        
+        <form action="" method="POST" enctype="multipart/form-data">
+            <br><br>
+            <img src="2.jpg" style="height: 200px; width: 20%; border-style: solid; border-color: red; 
+            margin-left: 950px; margin-top: 0px;">
+            <div id="p2" style="margin-left: 600px; margin-top: -200px;">
+                <label for="analysisType" style="color: white; font-size: 20px; width: 50%;">Select Analysis Type:</label><br><br>
+                <select id="analysisType" name="analysisType">
+                    <option value="univariate">Univariate</option>
+                    <option value="bivariate">Bivariate</option>
+                    <option value="multivariate">Multivariate</option>
+                </select><br><br>
+            </div>
+            <img src="1.jpg" style="height: 200px; width: 20%; border-style: solid; border-color: red; 
+            margin-left: 70px; margin-top: -120px;">
+            <div id="p5">
+                <!-- Submit button --> 
+                <input type="submit" value="Generate Plots" style="background-color: red; color: white; 
+                font-size: 20px; width: 25%; height: 70px; margin-left: 850px; margin-top: 30px; border-radius: 20px;">
+                <div style="margin-top: -50px; opacity: 0.3;">
+                    <a href="Plots.html" style="color: white; margin-left: 950px; font-size: 20px;">Generate Plots</a>
+                </div>
+
+            </div>
+            <div style="margin-top: 10px;">
+                <div class="file-upload-wrapper">
+                    <input type="file" name="file" id="file" placeholder="Please Upload a file" accept=".csv" onchange="displayFileColumns()">
+                    <label for="file">Upload File</label>
+                    <div class="file-info" id="file-info"></div>
+                    <div class="column-info" id="column-info"></div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    
+    <script>
+        function displayFileColumns() {
+            const fileInput = document.getElementById('file');
+            const fileInfo = document.getElementById('file-info');
+            const columnInfo = document.getElementById('column-info');
+            const file = fileInput.files[0];
+            
+            if (file) {
+                fileInfo.textContent = `Selected file: ${file.name}`;
+                
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const csvData = event.target.result;
+                    const allRows = csvData.split(/\r?\n|\r/);
+                    const headers = allRows[0].split(',');
+
+                    columnInfo.innerHTML = `<strong>Columns:</strong><br>`;
+                    headers.forEach(header => {
+                        const cleanedHeader = header.trim().replace(/^"|"$/g, '');
+
+                        const checkboxContainer = document.createElement('div');
+                        checkboxContainer.classList.add('checkbox-container');
+                        
+                        const checkbox = document.createElement('input');
+                        checkbox.type = 'checkbox';
+                        checkbox.id = cleanedHeader;
+                        checkbox.name = 'columns';
+                        checkbox.value = cleanedHeader;
+
+                        const label = document.createElement('label');
+                        label.htmlFor = cleanedHeader;
+                        label.appendChild(document.createTextNode(cleanedHeader));
+
+                        checkboxContainer.appendChild(checkbox);
+                        checkboxContainer.appendChild(label);
+                        
+                        columnInfo.appendChild(checkboxContainer);
+                    });
+                }
+                reader.onerror = function() {
+                    fileInfo.textContent = 'Error reading file';
+                }
+                reader.readAsText(file);
+            } else {
+                fileInfo.textContent = '';
+                columnInfo.textContent = '';
+            }
+        }
+    </script>
+</body>
+</html>
