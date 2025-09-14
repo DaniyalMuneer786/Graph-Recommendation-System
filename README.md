@@ -109,8 +109,11 @@ Download plots if needed.
 🔹 Why this Project is Useful?
 
 ✔ Very easy to use for people who don’t know data analysis.
+
 ✔ Works for students, researchers, and professionals.
+
 ✔ Can handle large datasets efficiently.
+
 ✔ Helps quickly understand data using graphs.
 
 🙏 Thanks for Checking Out This Project!
