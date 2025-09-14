@@ -50,14 +50,12 @@ It makes data analysis easy for students, researchers, and professionals.
 ---
 
 - 🔹 Tech Stack
-
 - Frontend: HTML, CSS, JavaScript
 - Backend: Python, Flask
 - Libraries: Pandas, Matplotlib
 ---
 
 - 🔹 Project Workflow
-
 - Open the Flask app (app.py) in terminal and run it.
 - A local server link (IP address) will appear. Click it.
 - Website will open.
@@ -79,7 +77,6 @@ It makes data analysis easy for students, researchers, and professionals.
 ---
 
 - 🔹 Why this Project is Useful?
-
 - ✔ Very easy to use for people who don’t know data analysis.
 - ✔ Works for students, researchers, and professionals.
 - ✔ Can handle large datasets efficiently.
